@@ -7,7 +7,7 @@
 
 enum input_type {EMPTY_STACK, PLUS, MINUS, MULT, DIV,
                 LEFTBR, RIGHTBR, SIN, COS, TAN, CTG, SQRT,
-                LN, NUM, VAR,
+                LN, NUM, VAR
                 }input;
 
 struct item {

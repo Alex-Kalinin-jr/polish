@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS =-Wall -Wextra -Werror
 SOURCES = my.c 11.c
-BUILD_DIR = ../build
-OUTFILE = graph
+BUILD_DIR = .
+OUTFILE = aaa
 
 all:
 	$(CC) $(CFLAGS) $(SOURCES) -o $(BUILD_DIR)/$(OUTFILE)

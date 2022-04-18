@@ -4,22 +4,29 @@
 
 void enqueue(struct queue *train, int id, double num, int precedence) {
     struct list *tmp = (struct list *)malloc(sizeof(struct list));
+    tmp -> next = NULL;
     tmp -> node.code = id;
     tmp -> node.number = num;
     tmp -> node.priority = precedence;
 
     if (train -> head == NULL) {
         train -> head = tmp;
-        train -> tail = tmp;
+
     } else {
         train -> tail -> next = tmp;
-        train -> tail = tmp;
     }
+
+    train -> tail = tmp;
 }
 
 struct list *deque (struct queue *train) {
-    struct list *ret = train -> head;//if deque head then to be checked
-    train -> head = train -> head -> next;
+    struct list *ret = train -> head;
+    if (train -> head == train -> tail) {
+        train -> head = NULL;
+        train -> tail = NULL;
+    } else {
+        train -> head = train -> head -> next;
+    }
     ret -> next = NULL;
     return ret;
 }
