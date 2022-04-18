@@ -28,6 +28,7 @@ struct queue {
 
 void enqueue(struct queue *train, int id, double num, int precedence);
 struct list *deque (struct queue *train);
+struct list *pop (struct queue *train);
 
 
 void parse(char *string, struct queue *my);

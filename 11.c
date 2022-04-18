@@ -10,10 +10,12 @@ int main() {
         printf("N/A");
     } else {
         parse(expression, &my);
-        printf("%d\n", my.head -> node.code);
-        printf("%d\n", my.head -> next -> node.code);
-        printf("%d\n", my.head -> next -> next -> node.code);
         printf("%d\n", my.tail -> node.code);
+        struct list *popped = pop(&my);
+        printf("first popped is: %d\n", popped -> node.code);
+        struct list *popped2 = pop(&my);
+        printf("sec popped is: %d\n", popped2 -> node.code);
+        printf("tail code is: %d\n", my.tail -> node.code);
     }
 
 

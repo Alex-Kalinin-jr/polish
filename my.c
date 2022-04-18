@@ -31,6 +31,24 @@ struct list *deque (struct queue *train) {
     return ret;
 }
 
+struct list *pop (struct queue *train) {
+    struct list *ret = train -> tail;
+    struct list *tmp = train -> head;
+    if (train -> head == train -> tail) {
+        train -> head = NULL;
+        train -> tail = NULL;
+    } else {
+        while (tmp -> next -> next != NULL) {
+            tmp = tmp -> next;
+            printf("step val is: %d\n", tmp -> node.code);
+        }
+        tmp -> next = NULL;
+        train -> tail = tmp;
+    }
+
+    ret -> next = NULL;
+    return ret;
+}
 
 
 // void destroy_queue(struct queue *train) {
