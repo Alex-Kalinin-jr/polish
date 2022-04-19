@@ -1,6 +1,7 @@
 #ifndef SRC_STRUCTURES_H_
 #define SRC_STRUCTURES_H_
 
+#define PI 3.142857
 #define LOW 1
 #define MEDIUM 2
 #define HIGHT 3
@@ -28,8 +29,10 @@ struct queue {
 
 void enqueue(struct queue *train, int id, double num, int precedence);
 void enqueue_list(struct queue *train, struct list *tmp);
+void copy_queue(struct queue *train, struct queue *new);
 struct list *dequeue (struct queue *train);
 struct list *pop (struct queue *train);
+void destroy_queue(struct queue *train);
 
 
 void parse(char *string, struct queue *my);

@@ -61,13 +61,21 @@ struct list *pop (struct queue *train) {
 }
 
 
-// void destroy_queue(struct queue *train) {
-//     while (train -> next) {
-//         struct queue *tmp = train;
-//         while (tmp -> next) {
-//             tmp = tmp -> next;
-//         }
-//         free(tmp);
-//     }
-//     free(train -> head);
-// }
+void copy_queue(struct queue *train, struct queue *new) {
+    struct list *tmp = train -> head;
+    while (tmp -> next != NULL) {
+        enqueue(new, tmp -> node.code, tmp -> node.number, tmp -> node.priority);
+        tmp = tmp -> next;
+    }
+    enqueue(new, tmp -> node.code, tmp -> node.number, tmp -> node.priority);
+}
+
+void destroy_queue(struct queue *train) {
+    struct list *tmp = train -> head;
+    while (tmp -> next) {
+        struct list *tmp2 = tmp;
+        tmp = tmp -> next;
+        free(tmp2);
+    }
+    free(tmp);
+}

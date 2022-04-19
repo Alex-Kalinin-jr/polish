@@ -49,17 +49,22 @@ int main() {
         if (checker1 != checker2) {
             puts("wrong expression");
         } else {
-            printf("last: %d\n", polish.tail -> node.code);
-            printf("first: %d\n", polish.head -> node.code);
+            struct queue newList = {NULL, NULL};
+            double step = 2 * PI / 20;
+            for (double y = 0; y <= 2*PI; y += step) {
+                copy_queue(&polish, &newList);
+                double res;
+                int indicator = eval (&newList, y, &res);
+                if (indicator == 1) {
+                    puts("wrong expression");
+                } else {
+                    printf("the result of expression in point x = %lf: %lf\n", y, res);
+                }
+
+            }
         }
 
-        double y;
-        int indicator = eval (&polish, 5, &y);
-        if (indicator == 1) {
-            puts("wrong expression");
-        } else {
-            printf("\nthe result is: %f\n", y);
-        }
+        destroy_queue(&polish);
     }
 
 
@@ -205,3 +210,6 @@ int eval (struct queue *train, double x, double *result) {
 
 
 
+            // printf("last: %d\n", polish.tail -> node.code);
+            // printf("sec: %d\n", polish.head -> next -> node.code);
+            // printf("first: %d\n", polish.head -> node.code);
