@@ -35,7 +35,7 @@ struct list *pop (struct queue *train);
 void destroy_queue(struct queue *train);
 
 
-void parse(char *string, struct queue *my);
+int parse(char *string, struct queue *my);
 int eval (struct queue *train, double x, double *result);
 
 #endif  // SRC_STRUCTURES_H_
