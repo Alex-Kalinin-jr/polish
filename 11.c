@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "my.h"
 
 
@@ -44,6 +45,7 @@ int main() {
             enqueue_list(&polish, tmp);
         }
 
+
         if (checker1 != checker2) {
             puts("wrong expression");
         } else {
@@ -51,6 +53,13 @@ int main() {
             printf("first: %d\n", polish.head -> node.code);
         }
 
+        double y;
+        int indicator = eval (&polish, 3.42, &y);
+        if (indicator == 1) {
+            puts("wrong expression");
+        } else {
+            printf("\nthe result is: %f\n", y);
+        }
     }
 
 
@@ -105,6 +114,64 @@ void parse(char *string, struct queue *my) {
 
         pr += 1;
     }
+}
+
+
+int eval (struct queue *train, double x, double *result) {
+    int res = 0;
+    struct queue stack = {NULL, NULL};
+    struct list *num1;
+    while (train -> head != NULL) {
+        struct list *elem = dequeue(train);
+        if (elem -> node.code == 13) {
+            enqueue_list(&stack, elem);
+        } else if (elem -> node.code ==14) {
+            elem -> node.number = x;
+            enqueue_list(&stack, elem);
+        } else {
+            switch (elem -> node.code) {
+                case PLUS: {
+                    num1 = pop(&stack);
+                    stack.tail -> node.number += num1 -> node.number;
+                    free(num1);
+                    free(elem);
+                    break;
+                }
+                case MINUS: {
+                    num1 = pop(&stack);
+                    stack.tail -> node.number -= num1 -> node.number;
+                    free(num1);
+                    free(elem);
+                    break;
+                }
+                case MULT: {
+                    num1 = pop(&stack);
+                    stack.tail -> node.number *= num1 -> node.number;
+                    free(num1);
+                    free(elem);
+                    break;
+                }
+                case DIV: {
+                    num1 = pop(&stack);
+                    stack.tail -> node.number /= num1 -> node.number;
+                    free(num1);
+                    free(elem);
+                    break;
+                }
+                case SIN: {
+                    stack.tail -> node.number = sin(stack.tail -> node.number);
+                    free(elem);
+                    break;
+                }
+            }
+        }
+    }
+    if (stack.tail != stack.head) {
+        res = 1;
+    } else {
+        *result = stack.head -> node.number;
+    }
+    return res;
 }
 
 

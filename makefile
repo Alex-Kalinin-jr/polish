@@ -5,7 +5,7 @@ BUILD_DIR = .
 OUTFILE = aaa
 
 all:
-	$(CC) $(CFLAGS) $(SOURCES) -o $(BUILD_DIR)/$(OUTFILE)
+	$(CC) $(CFLAGS) $(SOURCES) -lm -o $(BUILD_DIR)/$(OUTFILE)
 
 
 # clean:
