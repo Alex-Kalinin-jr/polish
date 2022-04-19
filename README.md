@@ -12,13 +12,13 @@ This program parses expression from stdin and evaluates it in interval (-2pi; 2p
 ## Notes
 - program distinushes the next actions: +, -, *, /, sin, cos, tan, ctg, sqrt, ln
 - variable should be written as 'x':
-\> sin(x), sinx, sin x, 35*(cos(tan(sqrt(x+2)))) etc..
-> **Attention!** program does not distinguish unary minus. I was lazy.
+> sin(x), sinx, sin x, 35*(cos(tan(sqrt(x+2)))) etc..
+**Attention!** program does not distinguish unary minus. I was lazy.
 - in the case of incorrect symbols programm just pass them:
-\> sindhfg(x) ------> sin(x)
+> sindhfg(x) ------> sin(x)
 - in the case of wrong expression the program will inform about this:
-\> sin(x ------> "wrong expression"
-\> 34 +* x ------> "wrong expression"
+> sin(x ------> "wrong expression"
+> 34 +* x ------> "wrong expression"
 - for the sake of portability such amenities as clearscreen were not implemented.
 - leaks were checked using Valgrind.
 
