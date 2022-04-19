@@ -27,7 +27,8 @@ struct queue {
 };
 
 void enqueue(struct queue *train, int id, double num, int precedence);
-struct list *deque (struct queue *train);
+void enqueue_list(struct queue *train, struct list *tmp);
+struct list *dequeue (struct queue *train);
 struct list *pop (struct queue *train);
 
 

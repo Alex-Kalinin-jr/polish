@@ -19,7 +19,18 @@ void enqueue(struct queue *train, int id, double num, int precedence) {
     train -> tail = tmp;
 }
 
-struct list *deque (struct queue *train) {
+void enqueue_list(struct queue *train, struct list *tmp) {
+    if (train -> head == NULL) {
+        train -> head = tmp;
+
+    } else {
+        train -> tail -> next = tmp;
+    }
+
+    train -> tail = tmp;
+}
+
+struct list *dequeue (struct queue *train) {
     struct list *ret = train -> head;
     if (train -> head == train -> tail) {
         train -> head = NULL;

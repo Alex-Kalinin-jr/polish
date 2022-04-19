@@ -10,12 +10,21 @@ int main() {
         printf("N/A");
     } else {
         parse(expression, &my);
-        printf("%d\n", my.tail -> node.code);
-        struct list *popped = pop(&my);
-        printf("first popped is: %d\n", popped -> node.code);
-        struct list *popped2 = pop(&my);
-        printf("sec popped is: %d\n", popped2 -> node.code);
-        printf("tail code is: %d\n", my.tail -> node.code);
+        struct queue polish = {NULL, NULL};
+        struct queue stack = {NULL, NULL};
+        while (my.head != NULL) {
+            struct list *elem = dequeue(&my);
+            if (elem -> node.code == 14 || elem -> node.code == 13) {
+                enqueue_list(&polish, elem);
+            } else {
+                enqueue_list(&stack, elem);
+            }
+        }
+
+        printf("polish head num: %f\n", polish.head -> node.number);
+        printf("polish tail num: %f\n", polish.tail -> node.number);
+        printf("stack head code: %d\n", stack.head -> node.code);
+        printf("polish tail num: %d\n", stack.tail -> node.code);
     }
 
 
