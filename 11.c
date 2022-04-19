@@ -171,6 +171,8 @@ int eval (struct queue *train, double x, double *result) {
     } else {
         *result = stack.head -> node.number;
     }
+    num1 = dequeue(&stack);
+    free(num1);
     return res;
 }
 

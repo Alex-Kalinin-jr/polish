@@ -15,8 +15,8 @@ all:
 # style:
 # 	python3 ../materials/linters/cpplint.py --extensions=c *.c *.h
 
-# leaks:
-# 	leaks -atExit -- $(BUILD_DIR)/$(OUTFILE)
+leaks:
+	valgrind --leak-check=full $(BUILD_DIR)/$(OUTFILE)
 
 # check:
 # 	cppcheck --enable=all --suppress=missingIncludeSystem *.c
