@@ -54,7 +54,7 @@ int main() {
         }
 
         double y;
-        int indicator = eval (&polish, 3.42, &y);
+        int indicator = eval (&polish, 5, &y);
         if (indicator == 1) {
             puts("wrong expression");
         } else {
@@ -83,8 +83,9 @@ void parse(char *string, struct queue *my) {
             enqueue(my, LEFTBR, 0, 0);
         if (*pr == ')')
             enqueue(my, RIGHTBR, 0, 0);
-        if (pr[0] == 's') {
+        if (pr[0] == 's' && pr[1] == 'i' && pr[2] == 'n') {
             enqueue(my, SIN, 0, HIGHT);
+            pr += 2;
         }
         if (pr[0] == 'c' && pr[1] == 'o' && pr[2] == 's') {
             enqueue(my, COS, 0, HIGHT);
@@ -160,6 +161,32 @@ int eval (struct queue *train, double x, double *result) {
                 }
                 case SIN: {
                     stack.tail -> node.number = sin(stack.tail -> node.number);
+                    free(elem);
+                    break;
+                }
+                case COS: {
+                    stack.tail -> node.number = cos(stack.tail -> node.number);
+                    free(elem);
+                    break;
+                }
+                case TAN: {
+                    stack.tail -> node.number = tan(stack.tail -> node.number);
+                    free(elem);
+                    break;
+                }
+                case CTG: {
+                    stack.tail -> node.number = 1 / tan(stack.tail -> node.number);
+                    free(elem);
+                    break;
+                }
+                case SQRT: {
+                    double k = stack.tail -> node.number;
+                    stack.tail -> node.number = sqrt(k);
+                    free(elem);
+                    break;
+                }
+                case LN: {
+                    stack.tail -> node.number = log(stack.tail -> node.number);
                     free(elem);
                     break;
                 }
