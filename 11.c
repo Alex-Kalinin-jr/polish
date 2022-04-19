@@ -4,6 +4,8 @@
 
 
 int main() {
+    int checker1 = 0;
+    int checker2 = 0;
     char expression[50];
     struct queue my = {NULL, NULL};
     if (scanf("%[^\n]s", expression) != 1) {
@@ -16,15 +18,39 @@ int main() {
             struct list *elem = dequeue(&my);
             if (elem -> node.code == 14 || elem -> node.code == 13) {
                 enqueue_list(&polish, elem);
+            } else  if (elem -> node.code == LEFTBR) {
+                checker1++;
+                enqueue_list(&stack, elem);
+            } else if (elem -> node.code == RIGHTBR) {
+                checker2++;
+                while (stack.tail -> node.code != LEFTBR) {
+                    struct list *tmp2 = pop(&stack);
+                    enqueue_list(&polish, tmp2);
+                }
+                struct list *tmpLeftbr = pop(&stack);
+                free(tmpLeftbr);
+                free(elem);
             } else {
+                while (stack.tail != NULL &&
+                    (elem -> node.priority <= stack.tail -> node.priority)) {
+                    struct list *tmp = pop(&stack);
+                    enqueue_list(&polish, tmp);
+                }
                 enqueue_list(&stack, elem);
             }
         }
+        while (stack.head != NULL) {
+            struct list *tmp = pop(&stack);
+            enqueue_list(&polish, tmp);
+        }
 
-        printf("polish head num: %f\n", polish.head -> node.number);
-        printf("polish tail num: %f\n", polish.tail -> node.number);
-        printf("stack head code: %d\n", stack.head -> node.code);
-        printf("polish tail num: %d\n", stack.tail -> node.code);
+        if (checker1 != checker2) {
+            puts("wrong expression");
+        } else {
+            printf("last: %d\n", polish.tail -> node.code);
+            printf("first: %d\n", polish.head -> node.code);
+        }
+
     }
 
 

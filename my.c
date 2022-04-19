@@ -51,7 +51,6 @@ struct list *pop (struct queue *train) {
     } else {
         while (tmp -> next -> next != NULL) {
             tmp = tmp -> next;
-            printf("step val is: %d\n", tmp -> node.code);
         }
         tmp -> next = NULL;
         train -> tail = tmp;
